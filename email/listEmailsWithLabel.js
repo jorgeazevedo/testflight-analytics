@@ -12,8 +12,6 @@ nconf.argv({
 var user = nconf.get('gmail_user');
 var password = nconf.get('gmail_password');
 var label = nconf.get('label');
-console.log('user is ' + user);
-console.log('label is ' + label);
 
 var config = {
 	imap: {
