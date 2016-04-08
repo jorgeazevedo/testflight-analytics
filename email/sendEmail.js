@@ -15,11 +15,11 @@ var user = nconf.get('gmail_user');
 var pass = nconf.get('gmail_password');
 var emailPath = nconf.get('email');
 
-// Load email
+// Load email object
 var emailJSON = fs.readFileSync(emailPath, 'utf8');
 var email = JSON.parse(emailJSON);
 
-// Load csv
+// Load csv in bcc
 var content = fs.readFileSync(email.bcc, 'utf8');
 
 // Parse csv and call sendEmailTo
