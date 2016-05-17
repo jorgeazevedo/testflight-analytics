@@ -22,13 +22,13 @@ var email = JSON.parse(emailJSON);
 if(numberOFEmailsInString(email.to) > 1)
 	throw new Error("More than one email in To field: " + email.to);
 
-sendEmail();
+sendEmail(email);
 
 function numberOFEmailsInString(str) {
 	return (str.match(/@/g) || []).length
 }
 
-function sendEmail() {
+function sendEmail(email) {
 	// create reusable transporter object using SMTP transport
 	var transporter = nodemailer.createTransport({
 	    service: "Gmail",
