@@ -19,7 +19,14 @@ var emailPath = nconf.get('email');
 var emailJSON = fs.readFileSync(emailPath, 'utf8');
 var email = JSON.parse(emailJSON);
 
+if(numberOFEmailsInString(email.to) > 1)
+	throw new Error("More than one email in To field: " + email.to);
+
 sendEmail();
+
+function numberOFEmailsInString(str) {
+	return (str.match(/@/g) || []).length
+}
 
 function sendEmail() {
 	// create reusable transporter object using SMTP transport
