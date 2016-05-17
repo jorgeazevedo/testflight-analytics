@@ -9,15 +9,24 @@ nconf.argv({
       alias: 'email',
       describe: 'JSON describing email to send',
       demand: true
+    },
+    "t": {
+      alias: 'to',
+      describe: 'To: field',
+      demand: false
     }
 }).file({ file: './config.json'} );
 var user = nconf.get('gmail_user');
 var pass = nconf.get('gmail_password');
 var emailPath = nconf.get('email');
+var toOverride = nconf.get('to');
 
 // Load email object
 var emailJSON = fs.readFileSync(emailPath, 'utf8');
 var email = JSON.parse(emailJSON);
+
+if(toOverride)
+	email["to"] = toOverride;
 
 if(numberOFEmailsInString(email.to) > 1)
 	throw new Error("More than one email in To field: " + email.to);
